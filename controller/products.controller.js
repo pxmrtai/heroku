@@ -1,5 +1,6 @@
-const { read } = require('../db');
+const faker = require('faker');
 var Product = require('../models/product.model')
+
 
 module.exports.index = async(req, res) => {
   // var page = parseInt(req.query.page) || 1;
@@ -16,4 +17,6 @@ module.exports.index = async(req, res) => {
   res.render('products/index',{
     products: products
   })
+   // Fake data products
+
 };

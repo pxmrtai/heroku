@@ -12,11 +12,36 @@ block content
                             h5.card-title= product.name
                             p.card-text= product.description
                             a.btn.btn-primary(href="/cart/add/"+ product.id) add to Cart
-
-
-    .nav(aria-label="Page navigation example")
-        ul.pagination.justify-content-center
-            while n < 20
-                li.page-item
-                    a.page-link(href='http://localhost:3000/products?page='+ n)= n++
-            
+    .row    
+        if pages > 0
+            .mx-auto
+                ul.pagination(style='margin-top: 2rem')
+                    if(current == 1)
+                        li.page-item.disabled
+                            a.page-link(href='/') First
+                    else    
+                        li.page-item    
+                            a.page-link(href='/') First
+                    if (n!==1)
+                        li.page-item.disabled
+                            a.page-link(href='#') ...
+                    //- if( i <= (current+2)&& i <= pages)
+                    //-     if(i == current)
+                    //-         li.page-item.active
+                    //-             a.page-link(href='/products/news/'+ i)= i
+                    //- else    
+                    //-     li.page-item
+                    //-         a.page-link(href='/news/'+ i)= i
+                    //- if (i == (current+2)&& i < pages)
+                    //-     li.page-item.disabled
+                    //-         a.page-link(href='#') ...
+                    while n < pages
+                        li.page-item    
+                            a.page-link(href='/products/news/'+ ++n)=n
+                    <!-- LAST ITEM -->
+                    if(current == pages)
+                        li.page-item.disabled
+                            a.page-link(href='#') Last
+                    else
+                        li.page-item
+                            a.page-link(href='/news/'+ pages) Last

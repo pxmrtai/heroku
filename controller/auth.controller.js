@@ -1,22 +1,29 @@
 var db = require("../db");
 const { value } = require("../db");
 const md5 = require("md5");
+const { findOne } = require("../models/user.model");
+const User = require("../models/user.model");
+
 
 module.exports.login = (req, res) => {
-  res.render("auth/login");
+  res.render("auth/login",{
+  });
 };
-module.exports.postLogin = (req, res) => {
+module.exports.postLogin = async (req, res) => {
   var email = req.body.email;
   var password = req.body.password;
-  var user = db.get("users").find({ email: email }).value();
+  console.log(password)
+  var user = await User.findOne({email: email})
   console.log(user);
   if (!user) {
     res.render("auth/login", {
       errors: ["User does not exist."],
       values: req.body,
+      
     });
     return;
   }
+
   var hashedPassword = md5(password);
   if (user.password !== hashedPassword) {
     res.render("auth/login", {
@@ -25,7 +32,7 @@ module.exports.postLogin = (req, res) => {
     });
     return;
   }
-  res.cookie("userId", user.id, {
+  res.cookie("userId", user._id, {
     signed: true,
   });
   res.redirect("/users");
