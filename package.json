@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect index.js",
+    "dev": "nodemon --inspect index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -24,5 +25,8 @@
     "nodemailer": "^6.4.11",
     "pug": "^3.0.0",
     "shortid": "^2.2.15"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
